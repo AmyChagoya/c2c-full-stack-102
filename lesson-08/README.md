@@ -14,8 +14,12 @@ Lesson plan reference: `/workspaces/c2c-full-stack-102/lesson_material/lesson-8_
 
 This folder already includes the Lesson 07 baseline so you can focus on **search**:
 
-- React client with an **insert form**: `/workspaces/c2c-full-stack-102/lesson-08/app/client`
-- Express server with a **MySQL connection + insert route**: `/workspaces/c2c-full-stack-102/lesson-08/app/server`
+- React client with an **insert form**: `/workspaces/c2c-full-stack-102/lesson-08/starter/app/client`
+- Express server with a **MySQL connection + insert route**: `/workspaces/c2c-full-stack-102/lesson-08/starter/app/server`
+
+You will do your work in:
+
+- `/workspaces/c2c-full-stack-102/lesson-08/app` (you will create this by copying one of the options below)
 
 You will add:
 
@@ -47,6 +51,27 @@ CREATE TABLE IF NOT EXISTS customers (
 	dob VARCHAR(20)
 );
 ```
+
+## Step 0: Create Your Working App Folder
+
+Before you start coding, create the working folder for this lesson by copying an `app/` directory into `lesson-08/app`.
+
+Option A (preferred): copy **your completed app from the prior lesson**:
+
+```bash
+cp -r /workspaces/c2c-full-stack-102/lesson-07/app /workspaces/c2c-full-stack-102/lesson-08/app
+```
+
+Option B: if you don’t have a working prior lesson app yet, copy the provided starter:
+
+```bash
+cp -r /workspaces/c2c-full-stack-102/lesson-08/starter/app /workspaces/c2c-full-stack-102/lesson-08/app
+```
+
+After this step, you should have:
+
+- `/workspaces/c2c-full-stack-102/lesson-08/app/client`
+- `/workspaces/c2c-full-stack-102/lesson-08/app/server`
 
 ## Run the App (2 terminals)
 
@@ -237,4 +262,4 @@ app.get("/api/customers/search", (req, res) => {
 
 The completed Lesson 08 app is provided in:
 
-- `/workspaces/c2c-full-stack-102/lesson-09/app`
+- `/workspaces/c2c-full-stack-102/lesson-09/starter/app`
