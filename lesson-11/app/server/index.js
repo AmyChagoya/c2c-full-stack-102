@@ -1,3 +1,57 @@
+// --- LESSON 12: CART TABLE & API ENDPOINTS ---
+// Create cart table if not exists (run this manually in your DB):
+// CREATE TABLE IF NOT EXISTS cart (
+//   id INT AUTO_INCREMENT PRIMARY KEY,
+//   product_id INT,
+//   name VARCHAR(255),
+//   description TEXT,
+//   image_url VARCHAR(255),
+//   price DECIMAL(10,2)
+// );
+
+// Add to cart (POST)
+app.post("/api/ecommerce/cart", (req, res) => {
+  const { product } = req.body;
+  if (!product) return res.status(400).json({ message: "No product data" });
+  const sql = `INSERT INTO cart (product_id, name, description, image_url, price) VALUES (?, ?, ?, ?, ?)`;
+  const values = [
+    product.id,
+    product.name,
+    product.description,
+    product.image_url,
+    product.price,
+  ];
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "DB error" });
+    }
+    res.status(201).json({ id: result.insertId });
+  });
+});
+
+// Get all cart items (GET)
+app.get("/api/ecommerce/cart", (req, res) => {
+  db.query("SELECT * FROM cart", (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "DB error" });
+    }
+    res.json(result);
+  });
+});
+
+// Remove from cart (DELETE)
+app.delete("/api/ecommerce/cart/:id", (req, res) => {
+  const productId = req.params.id;
+  db.query("DELETE FROM cart WHERE id = ?", [productId], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "DB error" });
+    }
+    res.json({ success: true });
+  });
+});
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");

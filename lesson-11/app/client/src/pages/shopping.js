@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import NavBar from "../components/nav";
+import Cart from "../components/cart";
 
 import axios from "axios";
 
@@ -50,28 +52,20 @@ const Shopping = () => {
     </>
   );
 
+  const removeFromCart = (productId) => {
+    setCartList(
+      cartList.filter((item) => (item.id || item.product_id) !== productId),
+    );
+  };
+
   const renderCart = () => (
-    <>
-      <div id="cart-container">
-        <button onClick={() => navigateTo(PAGE_PRODUCTS)} id="products-btn">
-          Back to Products
-        </button>
-
-        <h1 id="cart-title"> Cart </h1>
-
-        {cartList.map((product, idx) => (
-          <div className="card card-container" key={idx}>
-            <div id="product">
-              <img src={product.image} alt="" />
-              <h2> {product.name} </h2>
-              <h3> {product.description} </h3>
-              <h3> {product.price} </h3>
-            </div>
-          </div>
-        ))}
-        <button id="checkout-btn">Checkout</button>
-      </div>
-    </>
+    <Cart
+      cartList={cartList}
+      onRemove={removeFromCart}
+      onBack={() => navigateTo(PAGE_PRODUCTS)}
+      showBack={true}
+      showCheckout={true}
+    />
   );
 
   return (
